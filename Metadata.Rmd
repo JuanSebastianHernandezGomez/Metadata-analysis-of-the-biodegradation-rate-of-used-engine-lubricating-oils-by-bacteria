@@ -1,0 +1,159 @@
+---
+title: <center> Metadata analysis of the biodegradation rate of used engine lubricating oils by bacteria </center>
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction 
+
+In this metadata analysis, 63 bacteria were obtained from 28 different studies from which the reaction kinetic constant and half-life values were calculated for each study and used to make a comparison of previous studies of the biodegradation of used engine lubricating oils by bacteria, where the half-life and reaction kinetic constant is given by the following equation: 
+
+<center>  $Ln[A]=-kt + Ln[A]_{0}$
+</center>
+
+
+```{r cars, message=FALSE, warning=FALSE}
+# load library
+ library("pracma")
+library ("tidyverse")
+library("pastecs")
+library("matlab")
+library("plotly")
+library("knitr")
+library("agricolae")
+```
+
+## Load and transform data:
+
+The data shown below are extracted from scientific papers published in different journals if you wish to have more information you can see the complete document in the repository of the [Universidad de la Salle](https://ciencia.lasalle.edu.co/biologia/106/). 
+
+```{r Load data, message=FALSE, warning=FALSE}
+# Load data and Rename Columns
+metadata<- read_csv2("Metadata.csv")
+df <- data.frame(metadata)
+colnames(df)[colnames(df) == "Ini_Con_.mg.kg."] <- "Ini_Con_mg/Kg"
+colnames(df)[colnames(df) == "Fin_Con_.mg.kg."] <- "Fin_Con_mg/Kg"
+kable(head(df))
+```
+
+The following equation can be obtained by solving the general equation of the degradation kinetics degree 1 to calculate k:
+
+<center>  \begin{equation}
+ k =- \cfrac{ln(\frac{A}{A}_0)}{d}
+\end{equation}
+
+</center>
+
+```{r}
+# Calculate k 
+df= df %>% 
+    mutate(k=abs(log(`Fin_Con_mg/Kg`/`Ini_Con_mg/Kg`)/(`Days`)))
+kable(head(df))
+```
+
+To calculate Half live value use the following equation:
+
+<center>  $Half live = ln(\frac{2}{k})$
+</center>
+
+```{r}
+# Calculate Half Time value
+df = df  %>% 
+    mutate(Half_Time=log(2)/k)
+kable(head(df))
+```
+
+```{r message=FALSE, warning=FALSE}
+# Descriptive Statistics 
+kable(stat.desc(df,))
+```
+```{r}
+# Calculate mean by bacteria class 
+K_Mean= df %>% 
+        group_by(Class)%>% 
+        summarise (mean=mean(k))
+        Mean_K=data.frame(K_Mean)
+kable(Mean_K)
+```
+The following equation can be obtained by solving the general equation of the degradation kinetics degree 1 to calculate A(Final Concentration), this will be used to calculate final concentration at a given time using k mean by class to predict the biodegradation by every bacteria class: 
+
+<center>  $A=A_0*e^{-k*t}$
+</center>
+
+```{r}
+# Extract mean by bacteria class 
+Mean_Ac=Mean_K [1,2]
+Mean_Al=Mean_K [2,2]
+Mean_Ba=Mean_K [3,2]
+Mean_Be=Mean_K [4,2]
+Mean_Co=Mean_K [5,2]
+Mean_Fl=Mean_K [6,2]
+Mean_Ga=Mean_K [7,2]
+# Set Initial Concentration
+Ci=5000
+# Set number of days 
+Day <- linspace(0,80,17)
+# Calculate concentration at given day with k mean for each class bacteria
+Cf_Ac=Ci*exp(-Mean_Ac*Day)
+Cf_Al=Ci*exp(-Mean_Al*Day)
+Cf_Ba=Ci*exp(-Mean_Ba*Day)
+Cf_Be=Ci*exp(-Mean_Be*Day)
+Cf_Co=Ci*exp(-Mean_Co*Day)
+Cf_Fl=Ci*exp(-Mean_Fl*Day)
+Cf_Ga=Ci*exp(-Mean_Ga*Day)
+Actinobacteria<- c(Cf_Ac)
+Alphaproteobacteria <- c(Cf_Al)
+Bacilli<- c(Cf_Ba)
+Betaproteobacteria<- c(Cf_Be)
+Consortium<- c(Cf_Co)
+Flovobacteria<- c(Cf_Fl)
+Gammaproteobacteria<- c(Cf_Ga)
+# Create data frame with concentration at given day
+df_k <- data.frame(Day,Actinobacteria,Alphaproteobacteria,Bacilli,Betaproteobacteria,Consortium,Flovobacteria,Gammaproteobacteria)
+kable(head(df_k))
+```
+## Plot of biodegradation over time
+
+
+```{r, out.width='100%'}
+# Plot result of concentracion over a given time 
+fig <- plot_ly(df_k, x = ~Day, y = ~Consortium, name = 'Consortium', type = 'scatter', mode = 'lines') 
+fig <- fig %>% add_trace(y = ~Actinobacteria, name = 'Actinobacteria', mode = 'lines')
+fig <- fig %>% add_trace(y = ~Alphaproteobacteria, name = 'Alphaproteobacteria', mode = 'lines') 
+fig <- fig %>% add_trace(y = ~Bacilli, name = 'Bacilli', mode = 'lines')
+fig <- fig %>% add_trace(y = ~Betaproteobacteria, name = 'Betaproteobacteria', mode = 'lines')
+fig <- fig %>% add_trace(y = ~Flovobacteria, name = 'Flovobacteria', mode = 'lines')
+fig <- fig %>% add_trace(y = ~Gammaproteobacteria, name = 'Gammaproteobacteria', mode = 'lines')
+fig <- fig %>% layout(title = "Concentration mg/Kg by bacteria class",
+         xaxis = list(title = "Days"),
+         yaxis = list (title = "Concentration mg/Kg"))
+fig
+
+```
+## Statistical Analysis
+
+The results obtained from these two tests show that there is a difference between the consortia and the other classes of bacteria analyzed, so it can be concluded that to optimize the degradation time of used lubricating oils of motor oil the best option is to perform its degradation by bacterial consortia.
+
+
+```{r}
+# Anova Test
+anova <- aov(k~Class , data = df)
+summary(anova)
+# Least Significant Difference
+lsd_test <- LSD.test(anova,"Class")
+lsd_test$statistics
+lsd_test$parameters
+lsd_test$groups
+```
+
+```{r}
+# Plot result LSD test groups
+plot(lsd_test)
+
+```
+
+Created by : Juan Sebastian Hernandez Gomez 

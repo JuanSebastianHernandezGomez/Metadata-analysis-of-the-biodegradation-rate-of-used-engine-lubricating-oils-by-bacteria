@@ -1,0 +1,55 @@
+﻿Class;Specie;Ini_Con_(mg/kg);Fin_Con_(mg/kg);Days
+Actinobacteria;Arthrobacter sp, ZnC1;100;79,3;7
+Actinobacteria;Kocuria varians PbB3;100;94,2;7
+Actinobacteria;Kocuria varians MB2;100;63,7;7
+Actinobacteria;Corynebacterium sp;100;28,15;15
+Actinobacteria;Micrococcus sp;100;43,71;28
+Alphaproteobacteria;Ochrobactrum anthropi HM-1 ;100;42,1;21
+Alphaproteobacteria;Ochrobactrum sp, C1;17200;6278;21
+Alphaproteobacteria;O, pseudintermedium C1 ;100;49,76;7
+Alphaproteobacteria;Agrobacterium tumefaciens;100;85,8;7
+Alphaproteobacteria;Methylobacterium mesophilicum;100;11,5;21
+Alphaproteobacteria;Brevundimonas diminuta AKL 1,6;100;94,2;14
+Bacilli;Bacillus cereus;100;76,9;7
+Bacilli;Bacillus sp,;100;97,24;15
+Bacilli;Bacillus subtilis moh3;100;37,1;14
+Bacilli;Lycinibacillus sphaericus TCP C 2,1;100;94,96;14
+Bacilli;Bacillus cereus DRDU1;100;71;28
+Bacilli;Bacillus sp,;100;25,2;10
+Bacilli;Bacillus sp;100;21,8;28
+Betaproteobacteria;Achromobacter xylosoxidans CuC3;100;60,2;7
+Betaproteobacteria;Achromobacter xylosoxidans CuC3;100;83,4;7
+Betaproteobacteria;Burkholderia cepacia MD1;100;92,1;7
+Betaproteobacteria;Achromobacter xylosooxidans MC1;100;70,8;7
+Flovobacteria;Chryseobacterium sp ;100;89,5;7
+Flovobacteria;Flavobacterium spp;100;40;28
+Gammaproteobacteria;P, aeruginosa SU-1;5000;2200;24
+Gammaproteobacteria;Citrobacter freundii HM-2;100;46,9;21
+Gammaproteobacteria;Pseudomonas aeruginosa LP5;100;8;21
+Gammaproteobacteria;Acinetobacter Calcoaceticus BD4;100;15;50
+Gammaproteobacteria;Acinetobacter calcoaceticus CuD2;100;64,7;7
+Gammaproteobacteria;Acinetobacter sp, ZnE3;100;61,9;7
+Gammaproteobacteria;Acinetobacter sp, ZnB2;100;52,6;7
+Gammaproteobacteria;Acinetobacter calcoaceticus PbD1;100;82,2;7
+Gammaproteobacteria;Pseudomonas sp, PbC1;100;54,6;7
+Gammaproteobacteria;Acinetobacter B35:L36S2;100;80,03;14
+Gammaproteobacteria;Pseudomonas S7;100;84,75;14
+Gammaproteobacteria;Pseudomonas sp,;100;36,54;15
+Gammaproteobacteria;Pseudomonas fluorescens;100;82,92;8
+Gammaproteobacteria;Pseudomonas aeruginosa DP-1;100;37,65;32
+Gammaproteobacteria;Acenitobacter junii TBC 1,2;100;95,96;14
+Gammaproteobacteria;P, aeruginosa;100;29;28
+Gammaproteobacteria;A, calcoaceticum;100;16;28
+Gammaproteobacteria;Acinetobacter sp,;100;29,5;10
+Gammaproteobacteria;Pseudomonas sp,;100;20,9;10
+Gammaproteobacteria;Pseudomona sp ;100;25,18;28
+Gammaproteobacteria;Acinetobacter sp;100;38,72;28
+Gammaproteobacteria;Citrobacter sp ;100;49,33;28
+Consortium;Consortium Bacteriano A2457;100;1;28
+Consortium;Consortium Bacteriano ;100;66,8;7
+Consortium;Consortium 3 ;100;10;28
+Consortium;Flavobacterium spp and A, calcoaceticum;100;11;28
+Consortium;A, calcoaceticum and P, aeruginosa;100;18;28
+Consortium;Flavobacterium spp, and P, aeruginosa;100;33;28
+Consortium;Consortium;100;9,8;10
+Consortium;Consortium;100;10,73;28
