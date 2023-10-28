@@ -10,7 +10,7 @@ The data shown below are extracted from scientific papers published in different
 
 ## Load library
 
- Before use install the following libraries
+ Before use install the following R libraries
 
 ```bash
 library("pracma")
